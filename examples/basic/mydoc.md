@@ -35,3 +35,10 @@ for (var i = 0; i < 10; i++)
 ```
 
 Listing: Demo Listing
+
+
+## EPS plaatjes sample
+Hier is een sample afbeelding in EPS formaat want dat supporten we tegenwoordig. 
+
+
+ ![State-diagram TT/IT](std-tt-it.eps)

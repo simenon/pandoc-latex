@@ -16,17 +16,25 @@ verify_example() {
 	# Precondition: no PDF file
 	[ ! -f "/tmp/md-to-pdf/${tdir}/mydoc.pdf" ]
 
+	filters=""
+	if [[ $tdir == "with-optional-packages" ]]
+	then
+		filters="--filter pandoc-plantuml --filter mermaid-filter"
+	fi
+
 	# Generate it by using pandoc-latex-template 1.4.0
-	run docker run --rm \
+	run podman run --rm \
 		-v "/tmp/md-to-pdf/${tdir}":/data \
 		-w /data  \
-		--user `id -u`:`id -g` \
-		rstropek/pandoc-latex:test \
+		simenon/pandoc-latex:test \
 		-f markdown \
 		--template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/v2.0.0/eisvogel.tex \
 		-t latex \
 		-o mydoc.pdf \
 		--metadata-file=mydoc.yaml \
+		--pdf-engine=pdflatex \
+		--pdf-engine-opt=--shell-escape \
+		${filters} \
 		mydoc.md
 
 	echo "$output"
