@@ -1,19 +1,15 @@
-# Pandoc LaTeX with Eisvogel
-
-![Docker Image Version (latest semver)](https://img.shields.io/docker/v/rstropek/pandoc-latex)
-
+# Enriched version of Pandoc LaTeX with Eisvogel (originally made by rstropek)
 
 ## Introduction
 
 *Pandoc* has an official Docker image [*pandoc/latex*](https://hub.docker.com/r/pandoc/latex). I like to use the [*Eisvogel* LaTeX template](https://github.com/Wandmalfarbe/pandoc-latex-template). Unfortunately, you cannot build PDFs from Markdown using this template with *pandoc/latex*. Some packages from *TeX Live* are missing.
 
-Therefore, I created a Docker image based on [*pandoc/latex*](https://hub.docker.com/r/pandoc/latex) that can build PDFs using *Eisvogel*. You can find it on *Docker Hub* under [*rstropek/pandoc-latex*](https://hub.docker.com/r/rstropek/pandoc-latex).
-
+Therefore, I created a Docker image based on [*pandoc/latex*](https://hub.docker.com/r/pandoc/latex) that can build PDFs using *Eisvogel*. You can find it on *Docker Hub* under [*simenon/pandoc-latex*](https://hub.docker.com/r/simenon/pandoc-latex).
+ 
 
 ## Examples
 
 The [*examples*](examples) folder contains an example document (markdown content, YAML metadata) including the generated PDF document.
-
 
 ## Usage
 
@@ -36,10 +32,10 @@ The following filters are supported
 ### Linux
 
 ```bash
-docker run --rm \
+podman run --rm \
     -v `pwd`:/data \
     -w /data \
-    rstropek/pandoc-latex \
+    simenon/pandoc-latex \
     -f markdown \
     --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/v2.0.0/eisvogel.tex \
     -t latex \
@@ -51,10 +47,10 @@ docker run --rm \
 ### Windows
 
 ```bash
-docker run --rm ^
+podman run --rm ^
     -v %cd%:/data ^
     -w /data ^
-    rstropek/pandoc-latex ^
+    simenon/pandoc-latex ^
     -f markdown ^
     --template https://raw.githubusercontent.com/Wandmalfarbe/pandoc-latex-template/v2.0.0/eisvogel.tex ^
     -t latex ^
@@ -71,7 +67,7 @@ docker run --rm ^
 ```bash
 # Use a significative tag
 # (e.g. here, follow the version of pandoc/latex used as the basis in the Dockerfile).
-docker build -t rstropek/pandoc-latex:latest .
+podman build -t simenon/pandoc-latex:test .
 ```
 
 ### Tests

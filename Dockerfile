@@ -5,11 +5,16 @@ ENV PLANTUML_VERSION 1.2022.7
 
 RUN apk add --no-cache \
     py3-pip \ 
-    openjdk17-jre-headless \
+    openjdk17-jre \
     graphviz \
     chromium \
     nodejs \
-    npm 
+    npm \
+    ghostscript \
+    fontconfig \
+    ttf-dejavu \
+    freetype
+
 
 RUN wget "http://downloads.sourceforge.net/project/plantuml/${PLANTUML_VERSION}/plantuml.${PLANTUML_VERSION}.jar" -O /usr/bin/plantuml.jar \
   && printf '#!/bin/sh\njava -jar /usr/bin/plantuml.jar $@' > /usr/bin/plantuml \
@@ -58,4 +63,4 @@ RUN tlmgr update --self && \
     background \
     everypage \
     xurl \
-    epstopdf
+    epstopdf 
